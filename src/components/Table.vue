@@ -1,18 +1,9 @@
 <template>
-        <el-col :span="24" class="main">
+        <el-col :span="24" class="main" :style="{backgroundImage: 'url(' + img + ')'}">
             <menus></menus>
-            <section class="content-container">
+            <section class="content-container" >
                 <div class="grid-content bg-purple-light">
-                    <el-col :span="24" class="breadcrumb-container">
-                        <strong class="title">事项安排</strong>
-                        <el-breadcrumb separator="/" class="breadcrumb-inner">
-                            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                            <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-                            <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-                            <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-                        </el-breadcrumb>
-    
-                    </el-col>
+                  
                     <todo></todo>       
                 </div>
             </section>
@@ -28,6 +19,7 @@ import todo from './todo'; // * 导入刚才我们创建的 todo
 export default {
     data() {
         return {
+             img: require('../assets/images/pic1.jpg')
         }
     },
     methods: {
@@ -43,6 +35,6 @@ export default {
     }
 }
 </script>
-<style>
+<style lang="scss" scoped>
 @import  "../styles/home.scss";
 </style>

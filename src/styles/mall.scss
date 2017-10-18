@@ -1,26 +1,232 @@
+  .clearfix:before,
+  .clearfix:after {
+      display: table;
+      content: "";
+  }
+
+  .clearfix:after {
+      clear: both
+  }
+
   .el-row {
-    margin-bottom: 20px;
-    // &:last-child {
-    //   margin-bottom: 0;
-    // }   
+      margin-bottom: 20px;
+      &:last-child {
+          margin-bottom: 0;
+      }
+      .el-col {
+          border-radius: 4px;
+      }
   }
-  .el-col {
-    border-radius: 4px;
+
+  .el-carousel__item {
+      h3 {
+          color: #475669;
+          font-size: 14px;
+          opacity: 0.75;
+          line-height: 350px;
+          margin: 0;
+          text-align: center;
+      }
+      &::nth-child(2n) {
+          background-color: #99a9bf;
+      }
+      &:nth-child(2n+1) {
+          background-color: #d3dce6;
+      }
   }
-  .bg-purple-dark {
-    background: #99a9bf;
+
+  .text {
+      li {
+          padding: 6px 0;
+      }
+      a {
+          color: #666;
+          text-decoration: none;
+          font-size: 16px;
+      }
+      .tag-hot {
+          background: #ff1212;
+          padding: 0 4px;
+          font-size: 12px;
+          color: #fff;
+      }
+      font-size: 14px;
   }
-  .bg-purple {
-    background: #d3dce6;
-  }
-  .bg-purple-light {
-    background: #e5e9f2;
-  }
+
   .grid-content {
-    border-radius: 4px;
-    min-height: 36px;
+      border-radius: 4px;
+      min-height: 36px;
+      .el-card__header {
+          padding: 2px 20px;
+          background: #41b883;
+          color: #fff;
+      }
   }
+
   .row-bg {
-    padding: 10px 0;
-    background-color: #f9fafc;
+      padding: 10px 0;
+      background-color: #f9fafc;
   }
+
+  .time {
+      font-size: 13px;
+      color: #999;
+  }
+
+  .bottom {
+      margin-top: 13px;
+      line-height: 12px;
+  }
+
+  .button {
+      padding: 0;
+      float: right;
+  }
+
+  .image {
+      width: 100%;
+      display: block;
+  }
+
+  .mall-main {
+      width: 1200px;
+      margin: 0 auto!important;padding-top: 20px;
+  }
+
+  .item {
+      padding: 8px 0;
+  }
+
+  .mg-t {
+      margin-top: 20px;
+  }
+  /*detail*/
+
+  .detail-wrap {
+      width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+  }
+
+  .detail-left {
+      float: left;
+      width: 200px;
+      text-align: center;
+  }
+
+  .detail-right {
+      float: left;
+      width: 980px;
+      margin-left: 20px;
+  }
+
+  .product-board {
+      background: #fff;
+      padding: 20px 0;
+  }
+
+  .product-board ul {
+      margin-top: 20px;
+  }
+
+  .product-board li {
+      text-align: left;
+      padding: 10px 15px;
+      cursor: pointer;
+      list-style: none;
+  }
+
+  .product-board li.active,
+  .product-board li:hover {
+      background: #4fc08d;
+      color: #fff;
+  }
+
+  .product-board li a {
+      display: block;
+  }
+
+  .sales-board {
+      background: #fff;
+  }
+
+  .sales-board-form {}
+
+  .sales-board-intro h2 {
+      font-size: 20px;
+      padding: 20px;
+      margin-top: 0;
+  }
+
+  .sales-board-intro p {
+      background: #f7fcff;
+      padding: 10px 20px;
+      color: #999;
+      line-height: 1.8;
+  }
+
+  .sales-board-form {
+      padding: 30px 20px;
+      font-size: 14px;
+  }
+
+  .sales-board-line {
+      clear: both;
+      padding-bottom: 20px;
+  }
+
+  .sales-board-line-left {
+      display: inline-block;
+      width: 100px;
+  }
+
+  .sales-board-line-right {
+      display: inline-block;
+      width: 75%;
+  }
+
+  .sales-board-des {
+      border-top: 20px solid #e5e9f2;
+      padding: 15px 20px;
+  }
+
+  .sales-board-des p {
+      line-height: 1.6;
+  }
+
+  .sales-board-des h2 {
+      font-size: 20px;
+      padding-bottom: 15px;
+  }
+
+  .sales-board-des h3 {
+      font-size: 18px;
+      font-weight: bold;
+      padding: 20px 0 10px 0;
+  }
+
+  .sales-board-des li {
+      padding: 5px 0;
+  }
+
+  .sales-board-table {
+      width: 100%;
+      margin-top: 20px;
+  }
+
+  .sales-board-table th {
+      background: #4fc08d;
+      color: #fff;
+  }
+
+  .sales-board-table td {
+      border: 1px solid #f0f2f5;
+      padding: 15px;
+  }
+  .button {
+    background: #4fc08d;
+    color: #fff;
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+}

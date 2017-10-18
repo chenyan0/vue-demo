@@ -1,76 +1,97 @@
 <template>
-    <el-col :span="24" class="content-wrapper">
-        <el-row class=" form todo-new input-symbol">
-            <el-col :span="24">
-                <!-- 新增单个代办单项输入框,监听了回车事件，双向绑定text值,监听了disabled属性，在todo.locked为true的情况下无法编辑-->
-                <el-col :span="1">
-                    <i class="el-icon-plus"></i>
-                </el-col>
-                <el-col :span="23">
-                    <el-input v-model="text" placeholder="请输入内容" @keyup.enter.native="onAdd"></el-input>
-                </el-col>
-            </el-col>
-        </el-row>
-        <el-card class="box-card">
-            <el-row v-for="o in items" :key="o" class="lists-item">
-                <el-col :span="24">
-                    <el-col :span="4">
-                        <el-checkbox v-model="o.checked" @change="selectItem"></el-checkbox>
-                    </el-col>
-                    <el-col :span="17">
-                        <span v-bind:class="{over:o.isDelete}">{{ o.text }}</span>
-                    </el-col>
-                    <el-col :span="3">
-                        <span v-on:click="del(o)">删除</span>
-                        <span>修改</span>
-                        <span>详情</span>
-          
-                    </el-col>
-                </el-col>
-            </el-row>
-        </el-card>
-  
-    </el-col>
- 
+     <el-tabs v-model="activeName" >
+    <el-tab-pane label="未完成" name="first">
+           <el-table :data="tableData" style="width: 100%">
+      <el-table-column prop="date" label="日期" width="180"> </el-table-column>
+      <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
+      <el-table-column prop="address" label="地址"> </el-table-column>
+       <el-table-column label="操作">
+      <template scope="scope">
+        <el-button
+          size="small"
+          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+        <el-button
+          size="small"
+          type="danger"
+          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+      </template>
+    </el-table-column>
+    </el-table>
+    </el-tab-pane>
+    <el-tab-pane label="已完成" name="second">
+           <el-table :data="tableData" style="width: 100%">
+      <el-table-column prop="date" label="日期" width="180"> </el-table-column>
+      <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
+      <el-table-column prop="address" label="地址"> </el-table-column>
+       <el-table-column label="操作">
+      <template scope="scope">
+        <el-button
+          size="small"
+          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+        <el-button
+          size="small"
+          type="danger"
+          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+      </template>
+    </el-table-column>
+    </el-table>
+    </el-tab-pane>
+    <el-tab-pane label="已取消" name="third">
+           <el-table :data="tableData" style="width: 100%">
+      <el-table-column prop="date" label="日期" width="180"> </el-table-column>
+      <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
+      <el-table-column prop="address" label="地址"> </el-table-column>
+       <el-table-column label="操作">
+      <template scope="scope">
+        <el-button
+          size="small"
+          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+        <el-button
+          size="small"
+          type="danger"
+          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+      </template>
+    </el-table-column>
+    </el-table>
+
+    </el-tab-pane>
+
+  </el-tabs>
 </template>
 <script>
 export default {
-    data() {
-        return {
-            items: [
-                { checked: false, text: '新的一天', isDelete: false },
-                { checked: false, text: '新的一天', isDelete: false },
-                { checked: false, text: '新的一天', isDelete: false }],
-            text: '' //新增代办单项绑定的值
-        }
+   data() {
+      return {
+          tableData: [{
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            date: '2016-05-04',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1517 弄'
+          }, {
+            date: '2016-05-01',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1519 弄'
+          }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }],
+        activeName: 'second'
+      };
     },
     methods: {
-        onAdd: function () {
-            this.items.push({
-                checked: false, text: this.text, isDelete: false
-            }); // 当用户点击回车时候 ，给items的值新增一个对象，this.text 即输入框绑定的值
-            this.text = ''; //初始化输入框的值。
-        },
-        selectItem:function(eve){
-            if(eve.checked){
-                this.$refs
-            }
-        },
-
-        del:function(eve){
-            console.log(eve);
-            if(eve.checked){
-                eve.isDelete=!eve.isDelete;
-
-            }else{
-                 this.$message('请先选择删除条目');
-            }
-            console.log(eve.isDelete);
-
-        }
+      handleEdit(index, row) {
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
+      }
     }
+  };
 
-}
 </script>
 <style lang="scss" scoped>
 @import '../styles/todo.scss';
