@@ -66,9 +66,8 @@
           <div class="sales-board-line">
               <div class="sales-board-line-left">&nbsp;</div>
               <div class="sales-board-line-right">
-                  <div class="button" @click="showPayDialog">
-                    立即购买
-                  </div>
+                 
+                  <el-button type="primary"  @click="showPayDialog">立即购买</el-button>
               </div>
           </div>
       </div>
@@ -92,10 +91,11 @@
           <li>访问者电脑分辨率显示模式</li>
           <li>用户所使用的操作系统名称和版本</li>
           <li>用户所在地理区域分布状况等</li>
+          <li>{{home.title}}</li>
         </ul>
       </div>
-      <!--<my-dialog :is-show="isShowPayDialog" @on-close="hidePayDialog">
-        <table class="buy-dialog-table">
+      <my-dialog :is-show="isShowPayDialog" @on-close="hidePayDialog">
+        <table class="buy-dialog-table" >
           <tr>
             <th>购买数量</th>
             <th>产品类型</th>
@@ -108,7 +108,7 @@
             <td>{{ buyType.label }}</td>
             <td>{{ period.label }}</td>
             <td>
-              <span v-for="item in versions">{{ item.label }}</span>
+              <span v-for="item in versions" :key="item">{{ item.label }}</span>
             </td>
             <td>{{ price }}</td>
           </tr>
@@ -119,7 +119,7 @@
           确认购买
         </div>
       </my-dialog>
-      <my-dialog :is-show="isShowErrDialog" @on-close="hideErrDialog">
+      <!--<my-dialog :is-show="isShowErrDialog" @on-close="hideErrDialog">
         支付失败！
       </my-dialog>-->
       <!--<check-order :is-show-check-dialog="isShowCheckOrder" :order-id="orderId" @on-close-check-dialog="hideCheckOrder"></check-order>-->
@@ -136,23 +136,32 @@ import VSelection from '../../components/base/selection'
 import VCounter from '../../components/base/counter'
 import VChooser from '../../components/base/radio'
 import VMulChooser from '../../components/base/multiplyChooser'
-// import Dialog from '../../components/base/dialog'
+import Dialog from '../../components/base/dialog'
 // import BankChooser from '../../components/bankChooser'
 // import CheckOrder from '../../components/checkOrder'
 // import _ from 'lodash'
+  const Err_OK=0;
 export default {
-
+  created(){
+    this.$http.get('/api/home').then((response)=>{
+      response=response.body;
+      if(response.errno==Err_OK){
+        this.home=response.data;
+      }
+    })
+  },
    components: {
     VSelection,
     VCounter,
     VChooser,
     VMulChooser,
-    // MyDialog: Dialog,
+    MyDialog: Dialog,
     // BankChooser,
     // CheckOrder
   },
   data () {
     return {
+      home:'',
             products: [
         {
           name: '数据统计',
@@ -172,15 +181,15 @@ export default {
         },
         {
           name: '广告发布',
-          path: 'publish',
+          path: 'hill',
           active: false
         }
       ],
       imgMap: {
-        '/detail/count': require("../../assets/images/1.png"),
+        '/detail/analysis': require("../../assets/images/1.png"),
         '/detail/forecast': require("../../assets/images/2.png"),
-        '/detail/analysis': require("../../assets/images/3.png"),
-        '/detail/publish': require("../../assets/images/4.png")
+        '/detail/count': require("../../assets/images/3.png"),
+        '/detail/hill': require("../../assets/images/4.png")
       },
       buyNum: 0,
       buyType: {},
@@ -236,7 +245,7 @@ export default {
       isShowErrDialog: false
     }
   },
-    computed: {
+  computed: {
     productIcon () {
       console.log(this.$route.path);
       return this.imgMap[this.$route.path]
@@ -321,4 +330,30 @@ export default {
 <style lang="scss" scoped>
 @import '../../styles/mall.scss';
 </style>
+<style lang="scss">
+.buy-dialog-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+.buy-dialog-btn {
+  margin-top: 20px;
+}
+.buy-dialog-table {
+  width: 100%;
+  margin-bottom: 20px;border-collapse: collapse;
+    border-spacing: 0;
+}
+.buy-dialog-table td,
+.buy-dialog-table th{
+  border: 1px solid #e3e3e3;
+  text-align: center;
+  padding: 5px 0;
+}
+.buy-dialog-table th {
+  background: #4fc08d;
+  color: #fff;
+  border: 1px solid #4fc08d;
+}
+</style>
+
 

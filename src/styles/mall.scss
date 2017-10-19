@@ -56,10 +56,28 @@
   .grid-content {
       border-radius: 4px;
       min-height: 36px;
-      .el-card__header {
-          padding: 2px 20px;
-          background: #41b883;
-          color: #fff;
+
+  }
+
+  .buyBlock {
+      .el-card {
+          margin-bottom: 20px;
+          .el-button {
+              background: #41b883;
+              a {
+                  color: #fff;
+                  outline: none;
+                  text-decoration: none;
+              }
+          }.intro{
+                 padding-left: 14px;
+    display: inline-block;
+    vertical-align: bottom;
+    span{
+            font-size: 18px;
+    font-weight: bold;
+    }
+          }
       }
   }
 
@@ -83,14 +101,10 @@
       float: right;
   }
 
-  .image {
-      width: 100%;
-      display: block;
-  }
-
   .mall-main {
       width: 1200px;
-      margin: 0 auto!important;padding-top: 20px;
+      margin: 0 auto!important;
+      padding-top: 20px;
   }
 
   .item {
@@ -223,10 +237,11 @@
       border: 1px solid #f0f2f5;
       padding: 15px;
   }
+
   .button {
-    background: #4fc08d;
-    color: #fff;
-    display: inline-block;
-    padding: 10px 20px;
-    cursor: pointer;
-}
+      background: #4fc08d;
+      color: #fff;
+      display: inline-block;
+      padding: 10px 20px;
+      cursor: pointer;
+  }

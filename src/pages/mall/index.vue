@@ -1,16 +1,20 @@
 <template>
     <el-row :gutter="20" :span="24" class="mall-main">
+        <ul>
+            <li v-for="(item,key) in data" :key="item">{{item}}</li>
+
+        </ul>
         <el-col :span="6">
             <div class="grid-content">
                 <el-card class="box-card">
-                    <div slot="header" class="clearfix">
-                        <span style="line-height: 36px;">全部产品</span>
+                    <div slot="header">
+                        <span>全部产品</span>
                     </div>
                     <div v-for="(prod,index) in products" :key="index" class="text item">
                         <h3>{{prod.title}}</h3>
                         <ul>
                             <li v-for="(item,index) in prod.list" :key="index">
-                                <router-link :to="{path:'mall/detail/'+index}">
+                                <router-link :to="{path:'detail/'+index}">
                                     {{item.name }}
                                 </router-link>
                                 <span v-if="item.hot" class="tag-hot">Hot</span>
@@ -20,11 +24,11 @@
                     </div>
                 </el-card>
                 <el-card class="box-card mg-t">
-                    <div slot="header" class="clearfix">
-                        <span style="line-height: 36px;">最新消息</span>
+                    <div slot="header">
+                        <span>最新消息</span>
                     </div>
-                    <div v-for="o in 4" :key="o" class="text item">
-                        {{'列表内容 ' + o }}
+                    <div v-for="o in newsList" :key="o" class="text item">
+                       <a :href="o.url" >{{ o.title }}</a>
                     </div>
                 </el-card>
             </div>
@@ -38,15 +42,14 @@
                         </el-carousel-item>
                     </el-carousel>
                 </div>
-                <el-row class="mg-t">
-                    <el-col :span="7" v-for="(o, index) in boardList" :key="o" :offset="index > 0 ? 1 : 0">
-                        <el-card :body-style="{ padding: '0px' }">
-                            <img src="../../assets/images/op.jpg" class="image">
-                            <div style="padding: 14px;">
+                <el-row class="mg-t buyBlock" :gutter="20">
+                    <el-col :span="12" v-for="(o, index) in boardList" :key="o" >
+                        <el-card>
+                            <img :src="o.src" class="image">
+                            <div class="intro">
                                 <span>{{o.title}}</span>
                                 <p>{{o.description}}</p>
                                 <div class="bottom clearfix">
-    
                                     <el-button>
                                         <router-link :to="{path:'detail/'+o.id}">立即购买</router-link>
                                     </el-button>
@@ -62,9 +65,26 @@
     </el-row>
 </template>
 <script>
+ const Err_OK=0;
 export default {
+    created(){
+    this.$http.get('/api/getNewsList').then((response)=>{
+      response=response.body;
+      if(response.errno==Err_OK){
+        this.newsList=response.data;
+        console.log(newsList);
+      }
+    })
+  },
+  mounted(){
+      this.$http.get('/api/data').then(res=>{
+          this.data=res.data;
+          console.log(res);
+      })
+  },
     data() {
         return {
+            newsList:[],
             imgs:[{
                 src:require('../../assets/images/pic1.jpg'),
                 name:'1'
@@ -121,21 +141,36 @@ export default {
                     description: '开放产品是一款开放产品',
                     id: 'analysis',
                     toKey: 'analysis',
-                    saleout: false
+                    saleout: false,
+                    src:require('../../assets/images/1.png')
+
                 },
                 {
                     title: '品牌营销',
                     description: '品牌营销帮助你的产品更好地找到定位',
                     id: 'forecast',
                     toKey: 'count',
-                    saleout: false
+                    saleout: false,
+                    src:require('../../assets/images/2.png')
+                    
                 },
                 {
                     title: '使命必达',
                     description: '使命必达快速迭代永远保持最前端的速度',
                     id: 'count',
                     toKey: 'forecast',
-                    saleout: true
+                    saleout: true,
+                    src:require('../../assets/images/3.png')
+                    
+                },
+                 {
+                    title: '勇攀高峰',
+                    description: '帮你勇闯高峰，到达事业的顶峰',
+                    id: 'hill',
+                    toKey: 'publish',
+                    saleout: false,
+                    src:require('../../assets/images/4.png')
+                    
                 },
             ],
         };
@@ -145,5 +180,15 @@ export default {
 <style lang="scss" scoped>
 @import "../../styles/mall.scss";
 </style>
+<style lang="scss" >
+.grid-content {
+      .el-card__header{
+          padding: 10px 20px;
+          background: #41b883;
+          color: #fff;
+      }
+  }
+</style>
+
 
 

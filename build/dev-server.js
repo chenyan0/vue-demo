@@ -8,6 +8,7 @@ if (!process.env.NODE_ENV) {
 var opn = require('opn')
 var path = require('path')
 var express = require('express')
+var mockjs = require('mockjs')
 var webpack = require('webpack')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
@@ -21,6 +22,31 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 var proxyTable = config.dev.proxyTable
 
 var app = express()
+
+var appData = require('../db.json')//引入文件
+var home = appData.home//json数据模块
+var getNewsList = appData.getNewsList//数据模块
+var apiRouters = express.Router()//定义router
+apiRouters.get('/home',function (req, res) {
+  res.json({
+     errno: 0,//返回值为json格式，效验码编程时方便判断返回状态
+     data: home
+  });
+})
+apiRouters.get('/getNewsList',function (req, res) {
+  res.json({
+    errno: 0,
+    data: getNewsList
+  })
+})
+apiRouters.get('/getPrice',function (req, res) {
+  res.json({
+    errno: 0,
+    data: getPrice
+  })
+})
+app.use('/api', apiRouters)//域名下的访问路径
+// app.use('/mock',express.static('../mock'))
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
