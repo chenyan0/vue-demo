@@ -115,14 +115,13 @@
         </table>
         <h3 class="buy-dialog-title">请选择银行</h3>
         <bank-chooser @on-change="onChangeBanks"></bank-chooser>
-        <div class="button buy-dialog-btn" @click="confirmBuy">
-          确认购买
-        </div>
+  
+        <el-button type="primary" class="button buy-dialog-btn"  @click="confirmBuy">确认购买</el-button>
       </my-dialog>
-      <!--<my-dialog :is-show="isShowErrDialog" @on-close="hideErrDialog">
+      <my-dialog :is-show="isShowErrDialog" @on-close="hideErrDialog">
         支付失败！
-      </my-dialog>-->
-      <!--<check-order :is-show-check-dialog="isShowCheckOrder" :order-id="orderId" @on-close-check-dialog="hideCheckOrder"></check-order>-->
+      </my-dialog>
+      <check-order :is-show-check-dialog="isShowCheckOrder" :order-id="orderId" @on-close-check-dialog="hideCheckOrder"></check-order>
   </div>
 </div>
 </div>
@@ -137,8 +136,8 @@ import VCounter from '../../components/base/counter'
 import VChooser from '../../components/base/radio'
 import VMulChooser from '../../components/base/multiplyChooser'
 import Dialog from '../../components/base/dialog'
-// import BankChooser from '../../components/bankChooser'
-// import CheckOrder from '../../components/checkOrder'
+import BankChooser from '../../components/bankChooser'
+import CheckOrder from '../../components/checkOrder'
 // import _ from 'lodash'
   const Err_OK=0;
 export default {
@@ -156,8 +155,8 @@ export default {
     VChooser,
     VMulChooser,
     MyDialog: Dialog,
-    // BankChooser,
-    // CheckOrder
+    BankChooser,
+    CheckOrder
   },
   data () {
     return {
@@ -195,7 +194,7 @@ export default {
       buyType: {},
       versions: [],
       period: {},
-      price: 0,
+      price: "0",
       versionList: [
         {
           label: '客户版',
@@ -247,7 +246,6 @@ export default {
   },
   computed: {
     productIcon () {
-      console.log(this.$route.path);
       return this.imgMap[this.$route.path]
     }
   },
@@ -259,7 +257,6 @@ export default {
     },
     getPrice () {
       let buyVersionsArray = this.versions.map( (item) => {
-        console.log(item);
         return item.value
       })
       // let buyVersionsArray = _.map(this.versions, (item) => {
@@ -274,7 +271,9 @@ export default {
       this.$http.post('/api/getPrice', reqParams)
       .then((res) => {
         this.price = res.data.amount
+        console.log(res);
       })
+      
     },
     showPayDialog () {
       this.isShowPayDialog = true
@@ -308,6 +307,7 @@ export default {
       }
       this.$http.post('/api/createOrder', reqParams)
       .then((res) => {
+         console.log(res);
         this.orderId = res.data.orderId
         this.isShowCheckOrder = true
         this.isShowPayDialog = false

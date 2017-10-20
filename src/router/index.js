@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
-import Table from '@/components/Table'
+import Schedule from '@/components/Schedule'
 import  Home from '@/pages/home'
 import  MallHome from '@/pages/mall/index'
 import  DetailPage from '@/pages/mall/detail'
@@ -21,11 +21,11 @@ export default new Router({
         path: '/',
         name: 'Home',
         component: Home,    
-        redirect:'/table',
+        redirect:'/schedule',
         children:[
             {
-                path:'/table',
-                component:Table
+                path:'/schedule',
+                component:Schedule
             },{
                  path:'/mall',
                 component:MallHome

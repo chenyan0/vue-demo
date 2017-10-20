@@ -47,3 +47,11 @@ export default {
     }
 }
 </script>
+<style lang="scss">
+.el-menu{
+    background-color: transparent;
+}
+.el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item:hover, .el-menu--horizontal.el-menu--dark .el-submenu .el-submenu-title:hover, .el-menu-item:hover{
+  background-color: #293642;
+}
+</style>

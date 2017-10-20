@@ -26,6 +26,9 @@ var app = express()
 var appData = require('../db.json')//引入文件
 var home = appData.home//json数据模块
 var getNewsList = appData.getNewsList//数据模块
+var createOrder = appData.createOrder//数据模块
+var checkOrder = appData.checkOrder//数据模块
+var getPrice = appData.getPrice//数据模块
 var apiRouters = express.Router()//定义router
 apiRouters.get('/home',function (req, res) {
   res.json({
@@ -39,7 +42,19 @@ apiRouters.get('/getNewsList',function (req, res) {
     data: getNewsList
   })
 })
-apiRouters.get('/getPrice',function (req, res) {
+apiRouters.post('/createOrder',function (req, res) {
+  res.json({
+    errno: 0,
+    data: createOrder
+  })
+})
+apiRouters.post('/checkOrder',function (req, res) {
+  res.json({
+    errno: 0,
+    data: checkOrder
+  })
+})
+apiRouters.post('/getPrice',function (req, res) {
   res.json({
     errno: 0,
     data: getPrice

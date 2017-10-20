@@ -1,96 +1,54 @@
 <template>
-     <el-tabs v-model="activeName" >
-    <el-tab-pane label="未完成" name="first">
-           <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="date" label="日期" width="180"> </el-table-column>
-      <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
-      <el-table-column prop="address" label="地址"> </el-table-column>
-       <el-table-column label="操作">
-      <template scope="scope">
-        <el-button
-          size="small"
-          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-        <el-button
-          size="small"
-          type="danger"
-          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-      </template>
-    </el-table-column>
-    </el-table>
+  <el-tabs v-model="activeName">
+    <el-tab-pane :label="'未完成('+tableData.length+')'" name="first">
+      <v-table :table-data="tableData"></v-table>
     </el-tab-pane>
-    <el-tab-pane label="已完成" name="second">
-           <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="date" label="日期" width="180"> </el-table-column>
-      <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
-      <el-table-column prop="address" label="地址"> </el-table-column>
-       <el-table-column label="操作">
-      <template scope="scope">
-        <el-button
-          size="small"
-          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-        <el-button
-          size="small"
-          type="danger"
-          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-      </template>
-    </el-table-column>
-    </el-table>
+    <el-tab-pane :label="'未完成('+tableData.length+')'" name="second">
+      <v-table :table-data="tableData"></v-table>
     </el-tab-pane>
-    <el-tab-pane label="已取消" name="third">
-           <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="date" label="日期" width="180"> </el-table-column>
-      <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
-      <el-table-column prop="address" label="地址"> </el-table-column>
-       <el-table-column label="操作">
-      <template scope="scope">
-        <el-button
-          size="small"
-          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-        <el-button
-          size="small"
-          type="danger"
-          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-      </template>
-    </el-table-column>
-    </el-table>
-
+    <el-tab-pane :label="'已取消('+tableData.length+')'" name="third">
+      <v-table :table-data="tableData"></v-table>
     </el-tab-pane>
-
+  
   </el-tabs>
 </template>
 <script>
+import VTable from './base/table.vue'
 export default {
-   data() {
-      return {
-          tableData: [{
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-          }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
-          }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }],
-        activeName: 'second'
-      };
+  components: {
+    VTable: VTable
+  },
+  data() {
+    return {
+      tableData: [{
+        date: '2016-05-02',
+        name: '王小虎a',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-04',
+        name: '王小虎b',
+        address: '上海市普陀区金沙江路 1517 弄'
+      }, {
+        date: '2016-05-01',
+        name: '王小虎c',
+        address: '上海市普陀区金沙江路 1519 弄'
+      }, {
+        date: '2016-05-03',
+        name: '王小虎d',
+        address: '上海市普陀区金沙江路 1516 弄'
+      }],
+      activeName: 'second'
+    };
+  },
+  methods: {
+    handleEdit(index, row) {
+      console.log(index, row);
     },
-    methods: {
-      handleEdit(index, row) {
-        console.log(index, row);
-      },
-      handleDelete(index, row) {
-        console.log(index, row);
-      }
+    handleDelete(index, row) {
+      console.log(index, row);
     }
-  };
+  }
+};
 
 </script>
 <style lang="scss" scoped>

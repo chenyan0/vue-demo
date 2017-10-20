@@ -1,5 +1,5 @@
 <template>
-        <el-col :span="24" class="main" :style="{backgroundImage: 'url(' + img + ')'}">
+        <el-col :span="24" class="main">
             <menus></menus>
             <section class="content-container" >
                 <div class="grid-content bg-purple-light">
