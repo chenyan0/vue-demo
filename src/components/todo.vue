@@ -3,7 +3,7 @@
     <el-tab-pane :label="'未完成('+tableData.length+')'" name="first">
       <v-table :table-data="tableData"></v-table>
     </el-tab-pane>
-    <el-tab-pane :label="'未完成('+tableData.length+')'" name="second">
+    <el-tab-pane :label="'已完成('+tableData.length+')'" name="second">
       <v-table :table-data="tableData"></v-table>
     </el-tab-pane>
     <el-tab-pane :label="'已取消('+tableData.length+')'" name="third">
@@ -37,7 +37,7 @@ export default {
         name: '王小虎d',
         address: '上海市普陀区金沙江路 1516 弄'
       }],
-      activeName: 'second'
+      activeName: 'first'
     };
   },
   methods: {

@@ -8,16 +8,8 @@ import  DetailPage from '@/pages/mall/detail'
 
 Vue.use(Router)
 const router=new Router({
-
-})
-
-export default new Router({
-    mode:'history',
-    routes: [{
-        path: '/login',
-        name: 'Login',
-        component: Login
-    }, {
+//    mode:'history',
+    routes: [ {
         path: '/',
         name: 'Home',
         component: Home,    
@@ -25,16 +17,51 @@ export default new Router({
         children:[
             {
                 path:'/schedule',
-                component:Schedule
+                component:Schedule,
+                meta: {
+                    title: '行程表'
+                }
             },{
                  path:'/mall',
-                component:MallHome
+                component:MallHome,
+                 meta: {
+                    title: '商城'
+                }
             },
             {
                  path:'detail/:id',
-                component:DetailPage
-            }
-        ]   
+                component:DetailPage,
+                 meta: {
+                    title: '商品详情'
+                }
+            }],
+     
+    }   ,
+     
+            //  { /* Not Found 路由，必须是最后一个路由 */
+            // path: '*',
+            // component: NotFound,
+            // meta: {
+            //     title: '找不到页面'
+            // }
+            // }
+        
+         {
+        path: '/login',
+        name: 'Login',
+        component: Login,
+         meta: {
+        title: '登陆入口'
+      }   
     }]
 })
 
+export default router;
+
+router.beforeEach((to, from, next) => {
+  /* 路由发生变化修改页面title */
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  next()
+})

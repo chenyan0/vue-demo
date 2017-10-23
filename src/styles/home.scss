@@ -6,7 +6,7 @@
     .header {
         height: 60px;
         line-height: 60px;
-        background: rgb(50, 65, 87);
+        background: #D4A5A5;
         color: #fff;
         .userinfo {
             text-align: right;
@@ -42,7 +42,7 @@
             }
         }
         .logo-width {
-            width: 230px
+            width: 190px
         }
         .tools {
             padding: 0px 23px;
@@ -63,13 +63,16 @@
         bottom: 0px;
         overflow: hidden;
         aside {
-            -ms-flex: 0 0 230px;
-            flex: 0 0 230px;
-            width: 230px;
-            background: #2f4050;
+            -ms-flex: 0 0 190px;
+            flex: 0 0 190px;
+            width: 190px;
+            background: #c6a3a3;
             .el-menu {
                 height: 100%;
                 background-color: transparent;
+                .el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item.is-active, .el-menu-item.is-active {
+    color: #F9FFEA;
+}
             }
             
             .collapsed {
@@ -93,9 +96,9 @@
             width: 60px
         }
         .menu-expanded {
-            -ms-flex: 0 0 230px;
-            flex: 0 0 230px;
-            width: 230px
+            -ms-flex: 0 0 190px;
+            flex: 0 0 190px;
+            width: 190px
         }
         .content-container {
             -ms-flex: 1;
