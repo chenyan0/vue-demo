@@ -6,15 +6,46 @@
     .header {
         height: 60px;
         line-height: 60px;
-        background: #D4A5A5;
-        color: #fff;
+        background: #495060;
+        color: hsla(0,0%,100%,.7);
+        .el-menu--horizontal {
+            background: transparent;
+            >.el-submenu{
+                background-color: #495060;
+                color: hsla(0,0%,100%,.7);
+                .el-submenu__title{
+                    color: hsla(0,0%,100%,.7);
+                       &:hover{
+                     background-color: #363e4f;
+                }
+                }
+                &:hover{
+                     background-color: #363e4f;
+                }
+            }
+               .is-active{
+                    color: #fff;
+                    background: #363e4f;
+                }
+            .el-menu-item{
+                background-color: #495060;
+                color: hsla(0,0%,100%,.7);
+              &.is-active{
+                    color: #fff;
+                    background: #363e4f;
+                }
+                &:hover{
+                    background-color: #363e4f;
+                }
+            }
+        }
         .userinfo {
             text-align: right;
             padding-right: 35px;
             float: right;
             .userinfo-inner {
                 cursor: pointer;
-                color: #fff;
+                color: hsla(0,0%,100%,.7);
                 img {
                     width: 40px;
                     height: 40px;
@@ -52,8 +83,8 @@
             cursor: pointer
         }
         .logo-collapse-width {
-    width: 60px
-}
+            width: 60px
+        }
     }
     .main {
         display: -ms-flexbox;
@@ -66,15 +97,15 @@
             -ms-flex: 0 0 190px;
             flex: 0 0 190px;
             width: 190px;
-            background: #c6a3a3;
+            background: #495060;
             .el-menu {
                 height: 100%;
                 background-color: transparent;
-                .el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item.is-active, .el-menu-item.is-active {
-    color: #F9FFEA;
-}
+                .el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item.is-active,
+                .el-menu-item.is-active {
+                    color: #F9FFEA;
+                }
             }
-            
             .collapsed {
                 width: 60px;
                 .submenu {
@@ -85,9 +116,9 @@
                     height: auto;
                     display: none
                 }
-                 .item {
-    position: relative
-}
+                .item {
+                    position: relative
+                }
             }
         }
         .menu-collapsed {
@@ -125,16 +156,14 @@
     }
 }
 
-  .bg-purple-dark {
-      background: #99a9bf;
-  }
+.bg-purple-dark {
+    background: #99a9bf;
+}
 
-  .bg-purple {
-      background: #d3dce6;
-  }
+.bg-purple {
+    background: #d3dce6;
+}
 
-  .bg-purple-light {
-      background: #e5e9f2;
-  }
-
-
+.bg-purple-light {
+    background: #e5e9f2;
+}

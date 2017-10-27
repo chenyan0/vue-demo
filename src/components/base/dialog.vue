@@ -32,6 +32,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.el-dialog{
+  z-index: 3000;
+}
 .drop-enter-active {
   transition: all .5s ease;
 }

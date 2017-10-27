@@ -184,8 +184,9 @@ export default {
 .grid-content {
       .el-card__header{
           padding: 10px 20px;
-          background: #A6D0E4;
-          color: #fff;
+            background: #f5c280;
+    color: #fff;
+    border-bottom: 0;
       }
   }
 </style>

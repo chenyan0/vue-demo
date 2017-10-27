@@ -2,8 +2,8 @@
         <el-col :span="24" class="main">
             <menus></menus>
             <section class="content-container" >
+                    <el-button type="info">新增行程</el-button>
                 <div class="grid-content bg-purple-light">
-                  
                     <todo></todo>       
                 </div>
             </section>

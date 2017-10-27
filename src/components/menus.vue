@@ -1,17 +1,28 @@
 <template>
     <aside :class="collapsed?'menu-collapsed':'menu-expanded'">
         <!--导航菜单-->
-        <el-menu mode="vertical" default-active="1" class="el-menu-vertical-demo">
-            <el-menu-item-group>
-                <el-menu-item index="1" v-for="item in items"  :key="item">
-                    <i class="el-icon-date"></i> {{item.key}}</el-menu-item>
-            </el-menu-item-group>
-            <li style="padding-left: 20px;">
-                <el-button type="text"  @click.native.prevent="add" to>新增</el-button>
-            </li>
-            
-        </el-menu>
-
+   <el-menu
+      default-active="1"
+      class="el-menu-vertical-demo"
+      @open="handleOpen"
+      @close="handleClose"
+      background-color="#545c64"
+      text-color="#ffffff"
+      active-text-color="#ffd04b">
+      <el-submenu index="1">
+        <template slot="title">
+          <i class="el-icon-menu"></i>
+          <span>行程表</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item index="1-1">未完成</el-menu-item>
+          <el-menu-item index="1-2">已完成</el-menu-item>
+          <el-menu-item index="1-2">已取消</el-menu-item>
+        </el-menu-item-group>
+        
+      </el-submenu>
+   
+    </el-menu>
     </aside>
     
 </template>
