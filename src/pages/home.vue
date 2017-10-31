@@ -9,13 +9,14 @@
                     </el-col>
                     <el-col :span="10">
                         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect"  background-color="#545c64">
-                            <el-menu-item index="1">任务中心</el-menu-item>
+                            <el-menu-item index="1" :to="{ path: '/tasks' }">任务中心</el-menu-item>
                             <el-submenu index="2">
                                 <template slot="title">我的工作台</template>
                                 <el-menu-item index="2-1">选项1</el-menu-item>
                                 <el-menu-item index="2-2">选项2</el-menu-item>
                                 <el-menu-item index="2-3">选项3</el-menu-item>
                             </el-submenu>
+                           <router-link to="/mall"> <el-menu-item index="3" >在线商城</el-menu-item></router-link>
                         </el-menu>
                     </el-col>
                     <el-col :span="4" class="userinfo">
@@ -25,9 +26,6 @@
                             <el-dropdown-menu slot="dropdown">
                                 <el-dropdown-item>
                                     <router-link to="/mall">我的消息</router-link>
-                                </el-dropdown-item>
-                                <el-dropdown-item>
-                                    <router-link to="/mall">去商城</router-link>
                                 </el-dropdown-item>
                                 <el-dropdown-item>
                                     <router-link to="/mall">设置</router-link>
@@ -64,7 +62,6 @@ export default {
         return {
             activeIndex: '1',
             dialogVisible: false,
-
             sysName: require('../assets/images/logo.png'),
             collapsed: false,
             sysUserName: '剑走偏锋',

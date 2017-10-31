@@ -27,7 +27,6 @@
     
 </template>
 <script>
-import Add from "./Add";
 export default {
     data() {
         return {
@@ -62,7 +61,18 @@ export default {
 .el-menu{
     background-color: transparent;
 }
-.el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item:hover, .el-menu--horizontal.el-menu--dark .el-submenu .el-submenu-title:hover, .el-menu-item:hover{
-  background-color: #293642;
+
+.el-submenu .el-menu-item:hover, .el-submenu__title:hover,.el-submenu.is-opened{
+     background-color:#363e4f;    color: #fff;
+}
+.el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item.is-active, .el-menu-item.is-active{
+    color: #fff;
+    background: #363e4f;
+}
+.el-submenu .el-menu{
+    background-color: #3e4554;
+}
+.el-submenu__title,.el-submenu .el-menu-item{
+    color:#c6c8cd; 
 }
 </style>

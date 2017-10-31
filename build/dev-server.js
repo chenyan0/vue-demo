@@ -61,7 +61,7 @@ apiRouters.post('/getPrice',function (req, res) {
   })
 })
 app.use('/api', apiRouters)//域名下的访问路径
-// app.use('/mock',express.static('../mock'))
+// app.use('/api',require('../src/mock.js'));
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {

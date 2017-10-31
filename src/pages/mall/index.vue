@@ -1,9 +1,5 @@
 <template>
     <el-row :gutter="20" :span="24" class="mall-main">
-        <ul>
-            <li v-for="(item,key) in data" :key="item">{{item}}</li>
-
-        </ul>
         <el-col :span="6">
             <div class="grid-content">
                 <el-card class="box-card">

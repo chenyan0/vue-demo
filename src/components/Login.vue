@@ -48,7 +48,7 @@ export default {
         handleSubmit2(ev) {
             var _this = this;
             this.$router.push({
-                path: '/schedule'
+                path: '/tasks'
             });
             // this.$refs.ruleForm2.validate((valid) => {
             //     if (valid) {

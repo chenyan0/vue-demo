@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
-import Schedule from '@/components/Schedule'
+import Tasks from '@/components/tasks'
+import Todo from '@/components/todo'
+import AddTask from '@/components/add-task'
 import  Home from '@/pages/home'
 import  MallHome from '@/pages/mall/index'
 import  DetailPage from '@/pages/mall/detail'
@@ -13,19 +15,36 @@ const router=new Router({
         path: '/',
         name: 'Home',
         component: Home,    
-        redirect:'/schedule',
+        redirect:'/tasks',
         children:[
             {
-                path:'/schedule',
-                component:Schedule,
-                meta: {
-                    title: '行程表'
-                }
+                path:'/tasks',
+                component:Tasks,
+                redirect:'/todo',
+                children:[
+                    {
+                        path:'/todo',
+                        component:Todo,
+                        meta: {
+                            title: '任务中心'
+                        }
+                        
+                    },
+                    {
+                        path:'/addTask',
+                        component:AddTask,
+                        meta: {
+                            title: '新增任务'
+                        }
+                        
+                    }
+                ],
+              
             },{
                  path:'/mall',
                 component:MallHome,
                  meta: {
-                    title: '商城'
+                    title: '在线商城'
                 }
             },
             {

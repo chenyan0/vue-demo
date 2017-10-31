@@ -270,7 +270,7 @@ export default {
       }
       this.$http.post('/api/getPrice', reqParams)
       .then((res) => {
-        this.price = res.data.amount
+        this.price = res.data.data.amount
         console.log(res);
       })
       

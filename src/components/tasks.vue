@@ -2,10 +2,9 @@
         <el-col :span="24" class="main">
             <menus></menus>
             <section class="content-container" >
-                    <el-button type="info">新增行程</el-button>
-                <div class="grid-content bg-purple-light">
-                    <todo></todo>       
-                </div>
+                <keep-alive>
+                    <router-view></router-view>
+                </keep-alive>
             </section>
         </el-col>
      
@@ -19,17 +18,11 @@ import todo from './todo'; // * 导入刚才我们创建的 todo
 export default {
     data() {
         return {
+            data:[],
              img: require('../assets/images/pic1.jpg')
         }
     },
-    methods: {
-        //显示编辑界面
-        handleEdit: function (index, row) {
-            this.editFormVisible = true;
-            this.editForm = Object.assign({}, row);
-        },
-
-    },
+  
     components:{
         menus,todo
     }
@@ -38,3 +31,4 @@ export default {
 <style lang="scss" scoped>
 @import  "../styles/home.scss";
 </style>
+
