@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
-import Tasks from '@/components/tasks'
-import Todo from '@/components/todo'
-import AddTask from '@/components/add-task'
+import Tasks from '@/pages/task/tasks'
+import Todo from '@/pages/task/todo'
+import AddTask from '@/pages/task/add-task'
 import  Home from '@/pages/home'
 import  MallHome from '@/pages/mall/index'
 import  DetailPage from '@/pages/mall/detail'
+import  OrderList from '@/pages/mall/orderList'
 
 Vue.use(Router)
 const router=new Router({
@@ -26,7 +27,7 @@ const router=new Router({
                         path:'/todo',
                         component:Todo,
                         meta: {
-                            title: '任务中心'
+                            title: '活动中心'
                         }
                         
                     },
@@ -34,7 +35,7 @@ const router=new Router({
                         path:'/addTask',
                         component:AddTask,
                         meta: {
-                            title: '新增任务'
+                            title: '新增活动'
                         }
                         
                     }
@@ -53,7 +54,15 @@ const router=new Router({
                  meta: {
                     title: '商品详情'
                 }
-            }],
+            },
+             {
+                 path:'orderList',
+                component:OrderList,
+                 meta: {
+                    title: '订单列表'
+                }
+            }
+            ],
      
     }   ,
      

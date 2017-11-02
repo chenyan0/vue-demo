@@ -1,28 +1,31 @@
 <template>
   <div>
-    <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="date" label="日期"> </el-table-column>
-      <el-table-column prop="intro" label="事项说明"> </el-table-column>
-      <el-table-column prop="address" label="地址"> </el-table-column>
+    <el-table :data="tableData" :default-sort = "{prop: 'date', order: 'descending'}" style="width: 100%">
+      <el-table-column prop="date" label="活动时间" sortable> </el-table-column>
+      <el-table-column prop="name" label="活动名称"> </el-table-column>
+      <el-table-column prop="region" label="活动区域"> </el-table-column>
+      <el-table-column prop="type" label="活动性质"> </el-table-column>
+      <el-table-column prop="resource" label="特殊资源"> </el-table-column>
+      <el-table-column prop="desc" label="活动形式"> </el-table-column>
       <el-table-column label="操作">
         <template scope="scope">
-          <el-button size="small" v-if="status==='unfinished'" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-          <el-button size="small" v-if="status==='finished' || status==='canceled'|| status==='unfinished'" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-          <el-button size="small" v-if="status==='unfinished' " type="warning" @click="handleDelete(scope.$index, scope.row)">取消</el-button>
+          <i class="el-icon-edit" v-if="status==='unfinished'" @click="handleEdit(scope.$index, scope.row)"></i>
+          <i class="el-icon-delete" v-if="status==='finished' || status==='canceled'|| status==='unfinished'" @click="handleDelete(scope.$index, scope.row)"></i>
+          <i class="el-icon-share" @click="handleDelete(scope.$index, scope.row)"></i>
         </template>
       </el-table-column>
     </el-table>
     <this-dialog :is-show="isShowDialog" @on-close="closeDialog">
       <el-form :model="form">
-        <el-form-item label="日期" :label-width="formLabelWidth">
+        <el-form-item label="活动时间" :label-width="formLabelWidth">
           <el-date-picker v-model="form.date" align="right" type="date" placeholder="选择日期" :picker-options="pickerOptions1">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="事项说明" :label-width="formLabelWidth">
-          <el-input v-model="form.intro" auto-complete="off"></el-input>
+        <el-form-item label="活动名称" :label-width="formLabelWidth">
+          <el-input v-model="form.name" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="地址" :label-width="formLabelWidth">
-          <el-input v-model="form.address" auto-complete="off"></el-input>
+        <el-form-item label="活动区域" :label-width="formLabelWidth">
+          <el-input v-model="form.region" auto-complete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer" style="text-align:right">
@@ -45,8 +48,11 @@ export default {
       type: Array,
       default: [{
         date: '2016-05-02',
-        intro: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
+        name: '王小虎',
+        region: '上海市普陀区金沙江路 1518 弄',
+        type: '上海市普陀区金沙江路 1518 弄',
+        resource: '上海市普陀区金沙江路 1518 弄',
+        desc: '上海市普陀区金沙江路 1518 弄'
       }]
     }
   },
@@ -79,19 +85,18 @@ export default {
         }]
       },
       form: {
-        intro: '',
+        name: '',
         date: '',
-        address: '',
+        region: '',
       },
       formLabelWidth: '120px'
     };
   },
   methods: {
     handleEdit(index, row) {
-      this.isShowDialog = true
-      this.form.date = row.date;
-      this.form.intro = row.intro;
-      this.form.address = row.address;
+      this.isShowDialog = true;
+      this.form=row;
+   
     },
     closeDialog() {
       this.isShowDialog = false;

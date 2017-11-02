@@ -2,14 +2,14 @@
   <div>
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>任务中心</el-breadcrumb-item>
-      <el-breadcrumb-item>任务列表</el-breadcrumb-item>
+      <el-breadcrumb-item>活动中心</el-breadcrumb-item>
+      <el-breadcrumb-item>活动列表</el-breadcrumb-item>
     </el-breadcrumb>
-    <el-button type="default" @click="handleAdd">新增任务</el-button>
+    <el-button type="default" ><router-link :to="{ path: '/addTask' }" tag="span"> 新增活动</router-link></el-button>
     <div class="grid-content bg-purple-light">
       <el-tabs v-model="activeName" @tab-click="tabClick">
         <el-tab-pane v-for="(item,index) in tabPanel " :key="item.name" :label="item.title" :name="item.name">
-          <v-table :table-data="tableData" :status="item.name" v-loading="loading" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading"></v-table>
+          <v-table :table-data="tableData"  :status="item.name" v-loading="loading" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading"></v-table>
         </el-tab-pane>
       </el-tabs>
       <this-dialog :is-show="isShowDialog" @on-close="closeDialog">
@@ -66,8 +66,8 @@
   </div>
 </template>
 <script>
-import dialog from './base/dialog.vue';
-import VTable from './base/table.vue'
+import dialog from '../../components/base/dialog.vue';
+import VTable from '../../components/base/table.vue'
 export default {
   components: {
     VTable: VTable,
@@ -120,10 +120,6 @@ export default {
         title: '已完成',
         name: 'finished',
 
-      }, {
-        title: '已取消',
-        name: 'canceled',
-
       }
     ],
       tableData: [{}],
@@ -132,16 +128,12 @@ export default {
   };
 },
 methods: {
-  handleAdd(){
-    // this.isShowDialog = true;
-    this.$router.push({path:'/addTask'});
-  },
   closeDialog() {
     this.isShowDialog = false;
   },
   getLists() {
     this.loading = true;
-    this.$http.get('/api/data').then(res => {
+    this.$http.get('/api/tasks').then(res => {
       if (res) {
         let that = this;
         setTimeout(function () {
@@ -166,6 +158,25 @@ created() {
 
 </script>
 <style lang="scss" scoped>
-@import '../styles/todo.scss';
+@import '../../styles/todo.scss';
+</style>
+<style lang="scss">
+$green:#67C23A;
+$red:#FA5555;
+$orange:#EB9E05;
+.el-icon-edit{
+  color:$green;
+  padding:0 4px;
+}
+.el-icon-delete{
+  color:$red;
+  padding:0 4px;
+  
+}
+.el-icon-share{
+  color:$orange;
+  padding:0 4px;
+  
+}
 </style>
 

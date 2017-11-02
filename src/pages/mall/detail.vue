@@ -91,10 +91,9 @@
           <li>访问者电脑分辨率显示模式</li>
           <li>用户所使用的操作系统名称和版本</li>
           <li>用户所在地理区域分布状况等</li>
-          <li>{{home.title}}</li>
         </ul>
       </div>
-      <my-dialog :is-show="isShowPayDialog" @on-close="hidePayDialog">
+      <v-dialog :is-show="isShowPayDialog" @on-close="hidePayDialog">
         <table class="buy-dialog-table" >
           <tr>
             <th>购买数量</th>
@@ -108,20 +107,20 @@
             <td>{{ buyType.label }}</td>
             <td>{{ period.label }}</td>
             <td>
-              <span v-for="item in versions" :key="item">{{ item.label }}</span>
+              <span v-for="item in versions" :key="item">{{ item }}  </span> 
             </td>
             <td>{{ price }}</td>
           </tr>
         </table>
         <h3 class="buy-dialog-title">请选择银行</h3>
-        <bank-chooser @on-change="onChangeBanks"></bank-chooser>
+        <v-bank-chooser @on-change="onChangeBanks"></v-bank-chooser>
   
         <el-button type="primary" class="button buy-dialog-btn"  @click="confirmBuy">确认购买</el-button>
-      </my-dialog>
-      <my-dialog :is-show="isShowErrDialog" @on-close="hideErrDialog">
+      </v-dialog>
+      <v-dialog :is-show="isShowErrDialog" @on-close="hideErrDialog">
         支付失败！
-      </my-dialog>
-      <check-order :is-show-check-dialog="isShowCheckOrder" :order-id="orderId" @on-close-check-dialog="hideCheckOrder"></check-order>
+      </v-dialog>
+      <v-check-order :is-show-check-dialog="isShowCheckOrder" :order-id="orderId" @on-close-check-dialog="hideCheckOrder"></v-check-order>
   </div>
 </div>
 </div>
@@ -135,32 +134,26 @@ import VSelection from '../../components/base/selection'
 import VCounter from '../../components/base/counter'
 import VChooser from '../../components/base/radio'
 import VMulChooser from '../../components/base/multiplyChooser'
-import Dialog from '../../components/base/dialog'
-import BankChooser from '../../components/bankChooser'
-import CheckOrder from '../../components/checkOrder'
+import VDialog from '../../components/base/dialog'
+import VBankChooser from '../../components/bankChooser'
+import VCheckOrder from '../../components/checkOrder'
 // import _ from 'lodash'
   const Err_OK=0;
 export default {
   created(){
-    this.$http.get('/api/home').then((response)=>{
-      response=response.body;
-      if(response.errno==Err_OK){
-        this.home=response.data;
-      }
-    })
+    
   },
    components: {
     VSelection,
     VCounter,
     VChooser,
     VMulChooser,
-    MyDialog: Dialog,
-    BankChooser,
-    CheckOrder
+    VDialog: VDialog,
+    VBankChooser,
+    VCheckOrder
   },
   data () {
     return {
-      home:'',
             products: [
         {
           name: '数据统计',
@@ -253,7 +246,8 @@ export default {
       
     onParamChange (attr, val) {
       this[attr] = val
-      this.getPrice()
+      this.getPrice();
+        console.log(attr,this[attr]);
     },
     getPrice () {
       let buyVersionsArray = this.versions.map( (item) => {
@@ -271,7 +265,7 @@ export default {
       this.$http.post('/api/getPrice', reqParams)
       .then((res) => {
         this.price = res.data.data.amount
-        console.log(res);
+ 
       })
       
     },
@@ -295,9 +289,10 @@ export default {
       //   return item.value
       // })
         let buyVersionsArray = this.versions.map( (item) => {
-        console.log(item);
-        return item.value
+    
+        return item
       })
+    console.log(buyVersionsArray);
       let reqParams = {
         buyNumber: this.buyNum,
         buyType: this.buyType.value,
@@ -320,7 +315,7 @@ export default {
   mounted () {
     this.buyNum = 1
     this.buyType = this.buyTypes[0]
-    this.versions = [this.versionList[0]]
+    // this.versions = [this.versionList[0]]
     this.period = this.periodList[0]
     this.getPrice()
   }

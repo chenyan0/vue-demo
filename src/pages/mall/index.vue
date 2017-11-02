@@ -24,7 +24,7 @@
                         <span>最新消息</span>
                     </div>
                     <div v-for="o in newsList" :key="o" class="text item">
-                       <a :href="o.url" >{{ o.title }}</a>
+                        <a :href="o.url">{{ o.title }}</a>
                     </div>
                 </el-card>
             </div>
@@ -39,7 +39,7 @@
                     </el-carousel>
                 </div>
                 <el-row class="mg-t buyBlock" :gutter="20">
-                    <el-col :span="12" v-for="(o, index) in boardList" :key="o" >
+                    <el-col :span="12" v-for="(o, index) in boardList" :key="o">
                         <el-card>
                             <img :src="o.src" class="image">
                             <div class="intro">
@@ -61,35 +61,36 @@
     </el-row>
 </template>
 <script>
- const Err_OK=0;
+const Err_OK = 0;
 export default {
-    created(){
-    this.$http.get('/api/getNewsList').then((response)=>{
-      response=response.body;
-      if(response.errno==Err_OK){
-        this.newsList=response.data;
-        console.log(newsList);
-      }
-    })
-  },
-  mounted(){
-      this.$http.get('/api/data').then(res=>{
-          this.data=res.data;
-          console.log(res);
-      })
-  },
+    created() {
+        this.$http.get('/api/getNews').then((response) => {
+            //   response=response.body;
+            if (response) {
+                this.newsList = response.body;
+                console.log(response);
+            }
+        });
+        this.$http.get('/api/getBanners').then((response) => {
+            //   response=response.body;
+            if (response) {
+                this.imgs = response.body;
+                console.log(response);
+            }
+        })
+    },
     data() {
         return {
-            newsList:[],
-            imgs:[{
-                src:require('../../assets/images/pic1.jpg'),
-                name:'1'
-            },{
-                src:require('../../assets/images/pic2.jpg'),
-                name:'1'
-            },{
-                src:require('../../assets/images/pic3.jpg'),
-                name:'1'
+            newsList: [],
+            imgs: [{
+                src: require('../../assets/images/pic1.jpg'),
+                name: '1'
+            }, {
+                src: require('../../assets/images/pic2.jpg'),
+                name: '1'
+            }, {
+                src: require('../../assets/images/pic3.jpg'),
+                name: '1'
             }],
             products: {
                 pc: {
@@ -120,7 +121,7 @@ export default {
                     list: [
                         {
                             name: '91助手',
-                            src: '',   
+                            src: '',
                             hot: true
                         },
                         {
@@ -138,7 +139,7 @@ export default {
                     id: 'analysis',
                     toKey: 'analysis',
                     saleout: false,
-                    src:require('../../assets/images/1.png')
+                    src: require('../../assets/images/1.png')
 
                 },
                 {
@@ -147,8 +148,8 @@ export default {
                     id: 'forecast',
                     toKey: 'count',
                     saleout: false,
-                    src:require('../../assets/images/2.png')
-                    
+                    src: require('../../assets/images/2.png')
+
                 },
                 {
                     title: '使命必达',
@@ -156,17 +157,17 @@ export default {
                     id: 'count',
                     toKey: 'forecast',
                     saleout: true,
-                    src:require('../../assets/images/3.png')
-                    
+                    src: require('../../assets/images/3.png')
+
                 },
-                 {
+                {
                     title: '勇攀高峰',
                     description: '帮你勇闯高峰，到达事业的顶峰',
                     id: 'hill',
                     toKey: 'publish',
                     saleout: false,
-                    src:require('../../assets/images/4.png')
-                    
+                    src: require('../../assets/images/4.png')
+
                 },
             ],
         };
@@ -178,13 +179,13 @@ export default {
 </style>
 <style lang="scss" >
 .grid-content {
-      .el-card__header{
-          padding: 10px 20px;
-            background: #f5c280;
-    color: #fff;
-    border-bottom: 0;
-      }
-  }
+    .el-card__header {
+        padding: 10px 20px;
+        background: #f5c280;
+        color: #fff;
+        border-bottom: 0;
+    }
+}
 </style>
 
 

@@ -13,13 +13,13 @@
 
 
 
-import menus from './menus'; // * 导入刚才我们创建的 menus组件
+import menus from '../../components/menus'; // * 导入刚才我们创建的 menus组件
 import todo from './todo'; // * 导入刚才我们创建的 todo
 export default {
     data() {
         return {
             data:[],
-             img: require('../assets/images/pic1.jpg')
+             img: require('../../assets/images/pic1.jpg')
         }
     },
   
@@ -29,6 +29,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import  "../styles/home.scss";
+@import  "../../styles/home.scss";
 </style>
 
