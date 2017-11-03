@@ -10,9 +10,17 @@
       <el-tabs v-model="activeName" @tab-click="tabClick">
         <el-tab-pane v-for="(item,index) in tabPanel " :key="item.name" :label="item.title" :name="item.name">
           <v-table :table-data="tableData"  :status="item.name" v-loading="loading" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading"></v-table>
+          <!--<el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page.sync="currentPage1"
+            :page-size="10"
+            layout="total, prev, pager, next"
+            :total="100">
+          </el-pagination>-->
         </el-tab-pane>
       </el-tabs>
-      <this-dialog :is-show="isShowDialog" @on-close="closeDialog">
+      <v-dialog :is-show="isShowDialog" @on-close="closeDialog">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
           <el-form-item label="活动名称" prop="name">
             <el-input v-model="ruleForm.name"></el-input>
@@ -61,17 +69,19 @@
             <el-button @click="resetForm('ruleForm')">重置</el-button>
           </el-form-item>
         </el-form>
-      </this-dialog>
+      </v-dialog>
     </div>
   </div>
 </template>
 <script>
-import dialog from '../../components/base/dialog.vue';
+import API from '../../api/api'
+const api= new API();
+import Vdialog from '../../components/base/dialog.vue';
 import VTable from '../../components/base/table.vue'
 export default {
   components: {
     VTable: VTable,
-    thisDialog: dialog
+    VDialog: Vdialog
   },
   data() {
     return {
@@ -133,15 +143,22 @@ methods: {
   },
   getLists() {
     this.loading = true;
-    this.$http.get('/api/tasks').then(res => {
+    let params = {
+			api:"/api/tasks",
+			param:"exec xFool_p_getapp '',1"
+		};
+    let that = this;
+    api.get(params).then(res => {
       if (res) {
-        let that = this;
         setTimeout(function () {
           that.loading = false;
-          that.tableData = res.data;
+          that.tableData = JSON.parse(res.data);
         }, 1000)
       }
-    })
+    }).catch(function(err){
+				that.loading2 = false;
+				api.reqFail(that,"获取列表失败请刷新");
+			});
   },
   tabClick() {
     this.getLists();
