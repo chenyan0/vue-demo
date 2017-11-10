@@ -1,22 +1,30 @@
 import axios from 'axios'
 import config from './config'
-
 // axios(config);
 class API {
-	//获取已授权列表
-	get (param) {
-		// config.data.strSQL = param.param;
+	//获取活动列表
+	getTask (param) {
 		return axios.post(param.api,{},config);
 	}
-	//添加授权
-	post (param) {
-		config.data.strSQL = param.param;
+	getPageIndexTasks(param){
+		return axios.post(param.api,param.data,config);
+		
+	}
+	//添加活动
+	postTask (param) {
+		return axios.post(param.api,param.data,config);
+	}
+	login (param) {
+		return axios.post(param.api,param.data,config);
+	}
+	getNews(param){
 		return axios.post(param.api,{},config);
 	}
-	reqSuccess(obj,msg){
+	reqSuccess(obj,msg,func){
 			obj.$message({
           		message: msg,
-          		type: 'success'
+				  type: 'success',
+				  onClose:func
         	});
 	}
 	reqFail(obj,msg){

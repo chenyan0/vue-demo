@@ -23,7 +23,7 @@
                     <div slot="header">
                         <span>最新消息</span>
                     </div>
-                    <div v-for="o in newsList" :key="o" class="text item">
+                    <div v-for="(o,index) in newsList" :key="index" class="text item">
                         <a :href="o.url">{{ o.title }}</a>
                     </div>
                 </el-card>
@@ -33,13 +33,13 @@
             <div class="grid-content ">
                 <div class="block">
                     <el-carousel height="350px">
-                        <el-carousel-item v-for="item in imgs" :key="item">
+                        <el-carousel-item v-for="(item,index) in imgs" :key="index">
                             <img :src="item.src" :title=" item.name ">
                         </el-carousel-item>
                     </el-carousel>
                 </div>
                 <el-row class="mg-t buyBlock" :gutter="20">
-                    <el-col :span="12" v-for="(o, index) in boardList" :key="o">
+                    <el-col :span="12" v-for="(o, index) in boardList" :key="index">
                         <el-card>
                             <img :src="o.src" class="image">
                             <div class="intro">
@@ -61,23 +61,28 @@
     </el-row>
 </template>
 <script>
+import API from '../../api/api'
+const api= new API();
 const Err_OK = 0;
 export default {
-    created() {
-        this.$http.get('/api/getNews').then((response) => {
+    mounted() {
+        let   params={
+            api:'/api/getNews',
+
+        };
+        api.getTask(params).then((res) => {
             //   response=response.body;
-            if (response) {
-                this.newsList = response.body;
-                console.log(response);
+            if (res) {
+                this.newsList = JSON.parse(res.data);
             }
         });
-        this.$http.get('/api/getBanners').then((response) => {
-            //   response=response.body;
-            if (response) {
-                this.imgs = response.body;
-                console.log(response);
-            }
-        })
+        // api.get('/api/getBanners').then((response) => {
+        //     //   response=response.body;
+        //     if (response) {
+        //         this.imgs = response.body;
+        //         console.log(response);
+        //     }
+        // })
     },
     data() {
         return {

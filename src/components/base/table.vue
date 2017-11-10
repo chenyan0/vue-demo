@@ -8,7 +8,7 @@
       <el-table-column prop="resource" label="特殊资源"> </el-table-column>
       <el-table-column prop="desc" label="活动形式"> </el-table-column>
       <el-table-column label="操作">
-        <template scope="scope">
+        <template slot-scope="scope">
           <i class="el-icon-edit" v-if="status==='unfinished'" @click="handleEdit(scope.$index, scope.row)"></i>
           <i class="el-icon-delete" v-if="status==='finished' || status==='canceled'|| status==='unfinished'" @click="handleDelete(scope.$index, scope.row)"></i>
           <i class="el-icon-share" @click="handleDelete(scope.$index, scope.row)"></i>

@@ -8,13 +8,13 @@ if (!process.env.NODE_ENV) {
 var opn = require('opn')
 var path = require('path')
 var express = require('express')
-var mockjs = require('mockjs')
+// var mockjs = require('mockjs')
 var webpack = require('webpack')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
 
 // default port where dev server listens for incoming traffic
-var port = process.env.PORT || config.dev.port
+var port = process.env.PORT || config.dev.port  
 // automatically open browser, if not set will be false
 var autoOpenBrowser = !!config.dev.autoOpenBrowser
 // Define HTTP proxies to your custom API backend
@@ -61,7 +61,9 @@ apiRouters.post('/getPrice',function (req, res) {
   })
 })
 app.use('/api', apiRouters)//域名下的访问路径
-// app.use('/api',require('../src/mock.js'));
+
+// var mockData = require('../src/api/mock');
+// app.use('/', mockData);
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {

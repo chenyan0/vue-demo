@@ -1,7 +1,7 @@
+
 // 使用 Mock
 var Mock = require('mockjs')
 // 输出结果
-console.log(JSON.stringify(data, null, 4))
 //使用mockjs模拟数据
 var data = Mock.mock({
     'tasks|1-10': [{
@@ -43,7 +43,7 @@ Mock.mock('/api/tasks', (req, res) => {
     return  data.tasks;
 })
 Mock.mock('/api/tasks/add', (req, res) => {
-    return ;
+    return '';
 })
 Mock.mock('/api/getNews', (req, res) => {
     return data.news;
@@ -54,8 +54,36 @@ Mock.mock('/api/getBanners', (req, res) => {
 Mock.mock('/api/getOrderList', (req, res) => {
     return order.list;
 })
+Mock.mock('/api/login', (req, res) => {
+    return 1;
+})
+Mock.mock('/api/tasks/paged', (req, res) => {
+    return  data.tasks;
+})
 
 
+
+
+// var express=require('express'),
+// app     = express(),
+// Mock    = require('mockjs');
+// var Random=Mock.Random
+// // var fs = require('fs')
+// app.get('/tasks',(req,res)=>{
+//     var mockData={
+//         email:Random.email()
+//     }
+//     res.json(mockData);
+// })
+// module.exports = app;
+
+// // 写入到db.json
+// fs.writeFile('db.json', JSON.stringify(data, null, 4),  function(err) {
+//     if (err) {
+//         return console.error(err);
+//     }
+//     console.log("数据写入成功！");
+//  });
 
 
 

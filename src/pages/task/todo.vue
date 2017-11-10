@@ -5,19 +5,12 @@
       <el-breadcrumb-item>活动中心</el-breadcrumb-item>
       <el-breadcrumb-item>活动列表</el-breadcrumb-item>
     </el-breadcrumb>
-    <el-button type="default" ><router-link :to="{ path: '/addTask' }" tag="span"> 新增活动</router-link></el-button>
+    <el-button type="default" icon="plus"><router-link :to="{ path: '/addTask' }" tag="span"> 添加</router-link></el-button>
     <div class="grid-content bg-purple-light">
       <el-tabs v-model="activeName" @tab-click="tabClick">
         <el-tab-pane v-for="(item,index) in tabPanel " :key="item.name" :label="item.title" :name="item.name">
           <v-table :table-data="tableData"  :status="item.name" v-loading="loading" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading"></v-table>
-          <!--<el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page.sync="currentPage1"
-            :page-size="10"
-            layout="total, prev, pager, next"
-            :total="100">
-          </el-pagination>-->
+          <v-pagination :total="100" :pageIndex="2" @cur-change="currentChange"></v-pagination>
         </el-tab-pane>
       </el-tabs>
       <v-dialog :is-show="isShowDialog" @on-close="closeDialog">
@@ -78,10 +71,12 @@ import API from '../../api/api'
 const api= new API();
 import Vdialog from '../../components/base/dialog.vue';
 import VTable from '../../components/base/table.vue'
+import VPagination from '../../components/base/pagination'
 export default {
   components: {
     VTable: VTable,
-    VDialog: Vdialog
+    VDialog: Vdialog,
+    VPagination:VPagination
   },
   data() {
     return {
@@ -132,7 +127,7 @@ export default {
 
       }
     ],
-      tableData: [{}],
+      tableData: [],
         activeName: 'unfinished',
           loading: true
   };
@@ -148,7 +143,7 @@ methods: {
 			param:"exec xFool_p_getapp '',1"
 		};
     let that = this;
-    api.get(params).then(res => {
+    api.getTask(params).then(res => {
       if (res) {
         setTimeout(function () {
           that.loading = false;
@@ -162,6 +157,29 @@ methods: {
   },
   tabClick() {
     this.getLists();
+  },
+  currentChange(val){
+    console.log(val);
+    this.loading = true;
+    let params = {
+			api:"/api/tasks/paged",
+			data:{
+        pageIndex:val
+      }
+		};
+    let that = this;
+    api.getPageIndexTasks(params).then(res => {
+      if (res) {
+        console.log(params);
+        setTimeout(function () {
+          that.loading = false;
+          that.tableData = JSON.parse(res.data);
+        }, 1000)
+      }
+    }).catch(function(err){
+				that.loading2 = false;
+				api.reqFail(that,"获取列表失败请刷新");
+			});
   }
 },
 mounted() {

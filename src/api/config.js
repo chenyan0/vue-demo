@@ -3,17 +3,19 @@ export default{
 
 	url: '/',
 
-	// baseURL: 'http://localhost:8000/',
+	// baseURL: 'http://localhost:8008',
 	method: 'get',
 
 	transformRequest: [
+
 		function(data) {
-			// 为了避免qs格式化时对内层对象的格式化先把内层的对象转为
-			data.strSQL = base64encode(data.strSQL);
+			
+				// 为了避免qs格式化时对内层对象的格式化先把内层的对象转为
+			// data.strSQL = base64encode(data.strSQL);
 			//由于使用的form-data传数据所以要格式化
 			data = Qs.stringify(data);
 			return data;
-		}
+					}
 	],
 
 
@@ -44,7 +46,7 @@ export default{
 		currentPage:1,
 		ItemsOfPage:99999,
 		type:0,
-		strSQL:""
+		// strSQL:""
 	},
 
 

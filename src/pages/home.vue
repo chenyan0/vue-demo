@@ -30,10 +30,10 @@
                             <el-dropdown-menu slot="dropdown">
                                 <el-badge :value="200" :max="99" class="item">
                                 <el-dropdown-item>
-                                    <router-link to="/mall">我的消息</router-link>
+                                    <router-link to="/messages">我的消息</router-link>
                                 </el-dropdown-item></el-badge>
                                 <el-dropdown-item>
-                                    <router-link to="/mall">设置</router-link>
+                                    <router-link to="/setting">设置</router-link>
                                 </el-dropdown-item>
                                 <el-dropdown-item divided @click.native="showDialog()">退出登录</el-dropdown-item>
                             </el-dropdown-menu>
@@ -58,11 +58,7 @@
 <script>
 
 
-import Dialog from '../components/base/dialog.vue';
 export default {
-    components: [
-        Dialog
-    ],
     data() {
         return {
             activeIndex: '1',

@@ -2,7 +2,16 @@ var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+// var fs = require('fs')
 
+// var nodeModules = {};
+// fs.readdirSync('node_modules')
+//   .filter(function(x) {
+//     return ['.bin'].indexOf(x) === -1;
+//   })
+//   .forEach(function(mod) {
+//     nodeModules[mod] = 'commonjs ' + mod;
+//   });
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -11,12 +20,14 @@ module.exports = {
   entry: {
     app: './src/main.js'
   },
+  // target: 'web',
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
+     
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -54,5 +65,6 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  // externals: nodeModules
 }
