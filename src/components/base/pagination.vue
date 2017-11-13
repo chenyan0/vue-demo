@@ -33,3 +33,10 @@ export default {
     }
 }
 </script>
+<style language="scss" scoped>
+.block{
+    float: right;
+    margin-top: 20px;
+}
+</style>
+

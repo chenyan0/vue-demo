@@ -8,6 +8,7 @@
                         <img :src="this.sysName" />
                     </el-col>
                     <el-col :span="10">
+                        
                         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#545c64">
                             <router-link to="/tasks">
                                 <el-menu-item index="1">活动中心</el-menu-item>

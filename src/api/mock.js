@@ -39,8 +39,16 @@ var order=Mock.mock({
         'shopId|10000-20000':20000
     }]
 })
-Mock.mock('/api/tasks', (req, res) => {
-    return  data.tasks;
+Mock.mock('/api/tasks',{
+    'tasks|1-10': [{
+        'id|+1': 1,
+        'date':'@date',
+        'name':'@ctitle()',
+        'region':'@county(true)',
+        'type':'@ctitle()',
+        'resource':'@ctitle()',
+        'desc':'@ctitle()'
+    }],
 })
 Mock.mock('/api/tasks/add', (req, res) => {
     return '';
@@ -57,8 +65,18 @@ Mock.mock('/api/getOrderList', (req, res) => {
 Mock.mock('/api/login', (req, res) => {
     return 1;
 })
-Mock.mock('/api/tasks/paged', (req, res) => {
-    return  data.tasks;
+
+Mock.mock('/api/tasks/paged',{
+        'tasks|1-10': [{
+            'id|+1': 1,
+            'date':'@date',
+            'name':'@ctitle()',
+            'region':'@county(true)',
+            'type':'@ctitle()',
+            'resource':'@ctitle()',
+            'desc':'@ctitle()'
+        }],
+    
 })
 
 
